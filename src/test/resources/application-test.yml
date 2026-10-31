@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          httpclient:
+            response-timeout: 1s
+jwt:
+  secret: ZtsdhOSDr6dvhPt//gt1mfhIwHo1+qt0kX3GOzzH6oApKsgTaxicY0a1tJPihsEpT+i2DTLIv2SPJrE2f1hfYQ==
