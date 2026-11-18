@@ -1,0 +1,28 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: optional:file:.env[.properties]
+  cloud:
+    gateway:
+      server:
+        webflux:
+          httpclient:
+            connect-timeout: 2000
+            response-timeout: 5s
+          routes:
+            - id: auth-service
+              uri: ${services.auth-url}
+              predicates:
+                - Path=/api/v1/auth/login,/api/v1/auth/refresh
+            - id: user-service
+              uri: ${services.user-url}
+              predicates:
+                - Path=/api/v1/users/**,/api/v1/cards/**
+services:
+  auth-url: ${AUTH_SERVICE_URL:http://localhost:8081}
+  user-url: ${USER_SERVICE_URL:http://localhost:8080}
+jwt:
+  secret: ${JWT_SECRET}
